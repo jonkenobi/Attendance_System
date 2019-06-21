@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+<meta charset="UTF-8">
+<link href="../static/css/design.css" th:href="@{css/design.css}"
+	rel="stylesheet" media="screen" />
+<link href="../static/css/main.css" th:href="@{css/main.css}"
+	rel="stylesheet" media="screen" />
+<link href="../static/css/fontawesome-all.min.css"
+	th:href="@{css/fontawesome-all.min.css}" rel="stylesheet"
+	media="screen" />
+<link href="../static/css/noscript.css" th:href="@{css/noscript.css}"
+	rel="stylesheet" media="screen" />
+<title>メニュー</title>
+
+</head>
+
+
+<div class="header-text">
+	<a class='menuToggle' href="menu">メニュー</a> <a class='' href="logout"><span
+		th:text="${session.userId}"></span> からlogout</a>
+</div>
+<br>
+
+<body>
+	<section class="wrapper style4" style="padding:1em 0 0 0;">
+		<div class="inner">
+			<form action="/registrationForm">
+				<input type='submit' value="登録する" class='btn' />
+			</form>
+			<br>
+			<form action="/registrationList">
+				<input type='submit' value="勤怠一覧" class='btn' />
+			</form>
+		</div>
+	</section>
+</body>
+</html>

@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link th:href="@{/css/design.css}" rel="stylesheet" media="screen" />
+<link th:href="@{/css/main.css}" rel="stylesheet" media="screen" />
+<link th:href="@{/css/fontawesome-all.min.css}" rel="stylesheet"
+	media="screen" />
+<link th:href="@{/css/noscript.css}" rel="stylesheet" media="screen" />
+
+<title>編集</title>
+</head>
+<body>
+	<div class="header-text">
+		<a class='menu_left' href="/menu">メニュー</a> <a class='logout'
+			href="/logout"><span th:text="${session.userId}"></span> からlogout</a>
+	</div>
+	<form method="post"
+		th:action="@{/registrationForm/edit/complete/}+${Id}"
+		th:object="${registryForm}"novalidate>
+		<table class="width85">
+			<tr>
+				<td><p>日付*</p></td>
+				<td><p>開始</p></td>
+				<td><p>終了</p></td>
+			</tr>
+			<tr>
+				<td><input type='date' th:field="*{attendedDate}"
+					name='attendedDate' th:value="${registryForm.attendedDate}" /><br>
+					<span th:errors="*{attendedDate}"></span></td>
+				<td><input type='time' th:field="*{startTime}" name='startTime'
+					placeholder="例:9:30" /><br> <span th:errors="*{startTime}"></span></td>
+				<td><input type='time' th:field="*{endTime}"
+					th:value="${registryForm.endTime}" name='endTime'
+					placeholder="例:17:30" /><br> <span th:errors="*{endTime}"></span>
+					<ul>
+						<li class="errormsg" th:if="${#fields.hasErrors('global')}"
+							th:errors="*{global}"><span></span></li>
+					</ul></td>
+			</tr>
+			<tr>
+				<td><p>プロジェクト*</p></td>
+				<td><p>分類*</p></td>
+				<td><p>作業時間</p></td>
+			</tr>
+			<tr>
+				<td><select th:field="*{project}" name="project">
+						<option selected value=" ">選択してください</option>
+						<option th:each="proj:${ProjectInfo}"
+							th:value="${proj.projectName}" th:text="${proj.projectName}" />
+				</select><span th:errors="*{project}"></span></td>
+				<td><select th:field="*{task}" name="task">
+						<option selected value="">選択してください</option>
+						<option th:each="task:${Tasks}" th:value="${task.taskName}"
+							th:text="${task.taskName}" />
+				</select><span th:errors="*{task}"></span></td>
+				<td><input type="number" step="0.1" min="0"
+					th:field="*{taskHours}" name="taskHours"
+					th:value="${registryForm.taskHours}" placeholder='例：7, 8.5' /><span
+					th:errors="*{taskHours}"></span></td>
+			</tr>
+
+			<tr>
+				<td><p>作業内容</p></td>
+			</tr>
+			<tr>
+				<td><input type='text' th:field="*{taskDescription}"
+					name='taskDescription' th:value="${registryForm.taskDescription}"
+					placeholder='ここに入力' /> <span class="errormsg"
+					th:errors="*{taskDescription}"></span> <span
+					th:text="${session.error}" class="errormsg"></span></td>
+			</tr>	
+		</table>
+				<button type='submit'>更新</button>
+				<button th:formaction="@{/registrationForm/delete/}+${Id}" formmethod='post' class='button'>削除</button>
+				<button formaction="/registrationList" class='button'>キャンセル</button>
+	</form>
+</body>
+</html>

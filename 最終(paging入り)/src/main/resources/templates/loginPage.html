@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<link href="../static/css/design.css" th:href="@{css/design.css}"
+	rel="stylesheet" media="screen" />
+<link href="../static/css/main.css" th:href="@{css/main.css}"
+	rel="stylesheet" media="screen" />
+<link href="../static/css/fontawesome-all.min.css" th:href="@{css/fontawesome-all.min.css}"
+	rel="stylesheet" media="screen" />
+<link href="../static/css/noscript.css" th:href="@{css/noscript.css}"
+	rel="stylesheet" media="screen" />
+
+
+<title>ログイン</title>
+</head>
+<body th:object="${loginForm}">
+	<!-- <p th:text='#{message.sale}'></p>-->
+	<div class="center_screen">
+	<h1>ログイン</h1>
+	<form method='post' action="/login">
+		<h4>ユーザ</h4>
+		<input type='text' th:field="*{userId}" />
+		<p>*6文字以内</p>
+		<h4>パスワード</h4>
+		<input type='password' th:field="*{pw}" /> <br><input
+			type='submit' value='ログイン' class='btn' /> 
+	</form>
+	<ul>
+		<li th:each="error:${#fields.detailedErrors()}"><span
+			class="errormsg" th:text="${error.message}"> </span></li>
+	</ul>
+	</div>
+</body>
+</html>
