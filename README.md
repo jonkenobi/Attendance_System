@@ -2,6 +2,7 @@
 会社研修中に作ったシンプルな勤怠システム
 
 This is a basic attendance system for tracking employees' attendance records.
+
 Coded with Spring Boot(spring-tool-suite-4-4.0.0 RELEASE)
 
 Coding Languages included: java, html, css
