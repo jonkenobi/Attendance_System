@@ -13,7 +13,7 @@
 </head>
 <body>
 	<div class="header-text">
-		<a class='' href="../menu">メニュー</a> <a class='' href="../logout"><span
+		<a class='' href="../menu">メニュー</a><a class='' href="../logout"><span
 			th:text="${session.userId}"></span> からlogout</a>
 	</div>
 
@@ -41,21 +41,22 @@
 					th:action="@{/registrationForm/edit/input/}+${task.taskInfoId}">
 					<input type="submit" class="btn" value="編集" />
 				</form></td>
-
 			<!-- <td><form method="post" th:action="@{/registrationForm/delete/}+${task.taskInfoId}">
 					<input type="submit"class="btn" value="削除" />
 				</form></td> -->
 		</tr>
 	</table>
-	<div class="pagination center">
-		<a href="#">&laquo;</a>
-
+	<div class="pagination center pagination-position">
+		<a th:if="${pageNo.equals(1)}" href="#">&laquo;</a>
+		<a th:if="${!pageNo.equals(1)}" th:href="@{/registrationList/}+${pageNo-1}">&laquo;</a>
 		<ul class="pagination" th:fragment="pagination"
 			th:each="pageNumber:${pagesList}">
 			<li><a th:href="@{/registrationList/}+${pageNumber}"
 				th:text="${pageNumber}" th:class="${pageNumber==pageNo} ? active"></a></li>
 		</ul>
-		<a href="#">&raquo;</a>
+		<a th:if="${pageNo.equals(LastPage)}" href="#">&raquo;</a>
+		<a th:if="${!pageNo.equals(LastPage)}" th:href="@{/registrationList/}+${pageNo+1}">&raquo;</a>
+		
 	</div>
 	<!-- <div class="pagination center">
 		<ul>
@@ -66,16 +67,5 @@
 	<!-- 	 <a class="active" href="#">1</a> <a  href="#">2</a>
 		<a href="#">3</a> <a href="#">4</a> <a href="#">5</a> <a href="#">6</a>
 		 -->
-	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-		integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
-		crossorigin="anonymous"></script>
-	<script
-		src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
-		integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
-		crossorigin="anonymous"></script>
-	<script
-		src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
-		integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
-		crossorigin="anonymous"></script>
 </body>
 </html>

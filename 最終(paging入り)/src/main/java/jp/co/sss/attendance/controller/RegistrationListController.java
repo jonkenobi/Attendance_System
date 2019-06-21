@@ -45,6 +45,7 @@ public class RegistrationListController {
 	}
 
 //	Accessing the 登録一覧画面
+//	the pagination i do here is a lazy version that doesn't properly use the Service classes 
 	@RequestMapping(path = "/registrationList/{pageNo}")
 	public String showRegistrationsList(@PathVariable int pageNo, Model model, HttpSession session) {
 		final int PAGE_SIZE = 4;
@@ -58,11 +59,10 @@ public class RegistrationListController {
 		ArrayList<Integer> pages = new ArrayList<Integer>();
 		for (int i=0;i<totalPages;i++) {
 			pages.add(i+1);
-		}
-	
+		}	
 		model.addAttribute("pagesList", pages);
 		model.addAttribute("CurrentPage", currentPage);
-//		model.addAttribute("pageNo-1", pageNo-1);
+		model.addAttribute("LastPage", pages.get(pages.size()-1));
 		model.addAttribute("taskInfo", repo.findAll(currentPageable));
 		return "registrationList";
 		

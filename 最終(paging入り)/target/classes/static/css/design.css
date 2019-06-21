@@ -5,13 +5,11 @@
 	position:fixed;
 	top:10%;
 	left:30%;
-	align:center;
-	
+	align:center;	
 }
 
 .center {
   text-align: center;
- 
 }
 .center_screen_menu{
 	width:35%;
@@ -99,6 +97,11 @@ button:hover {
 	width:75%;
 }
 
+.pagination-position{
+	position:absolute;
+	bottom:3em;
+	left:40%;
+}
 /* Pagination links */
 .pagination a {
   display:inline;
