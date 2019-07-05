@@ -13,28 +13,26 @@ import jp.co.sss.attendance.form.LoginForm;
 
 @Controller
 public class LoginController {
-	@RequestMapping(path="/login")
-	public String showLoginPage(@ModelAttribute LoginForm form) {
-		return "loginPage";
-	}
-	
-	@RequestMapping(path="/login", method = RequestMethod.POST)
-	public String doLogin(@Valid@ModelAttribute LoginForm form,BindingResult result, HttpSession session) {
-		if(result.hasErrors()) {
-			return showLoginPage(form);
-		}
-		if (form.getPw().toLowerCase().contains("jona")) {
-			//go to main menu gamen
-			//TODO maybe session setattribute thingy
-			session.setAttribute("userId", form.getUserId());
-			System.out.println(session.getAttribute("userId"));
-			System.out.println("contains jona");
-			return "redirect:/menu";
-		}
-		else {
-			//TODO error message, stay on page.
-			return"loginPage";
-		}
-	}
+    @RequestMapping(path = "/login")
+    public String showLoginPage(@ModelAttribute LoginForm form) {
+        return "loginPage";
+    }
+
+    @RequestMapping(path = "/login", method = RequestMethod.POST)
+    public String doLogin(@Valid @ModelAttribute LoginForm form, BindingResult result, HttpSession session) {
+        if (result.hasErrors()) {
+            return showLoginPage(form);
+        }
+        if (loginVerificationPwContainsKeyword(form.getPw())) {
+            session.setAttribute("userId", form.getUserId());
+            return "redirect:/menu";
+        } else {
+            //TODO error message, stay on page.
+            return "loginPage";
+        }
+    }
+
+    private boolean loginVerificationPwContainsKeyword(String pw) {
+        return pw.toLowerCase().contains("jona");
+    }
 }
-;

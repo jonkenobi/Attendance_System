@@ -1,29 +1,45 @@
 @charset "UTF-8";
 
-.center_screen{
-	width:35%;
-	position:fixed;
-	top:10%;
-	left:30%;
-	align:center;	
+.center_screen {
+	width: 35%;
+	position: fixed;
+	top: 10%;
+	left: 30%;
+	align: center;
 }
 
 .center {
-  text-align: center;
-}
-.center_screen_menu{
-	width:35%;
-	position:fixed;
-	top:25%;
-	left:40%;
-	align:center;
+	text-align: center;
 }
 
-.header-text{
-	font-size:20px;
-	padding:1em 1em 1em 1em ;
+.center_screen_menu {
+	width: 35%;
+	position: fixed;
+	top: 25%;
+	left: 40%;
+	align: center;
+}
+
+.header-text {
+	font-size: 20px;
+	padding: 1em 1em 1em 1em;
 }
 /* Navbar links */
+#navsearch{
+	margin-top: 0;
+    padding-top: 0px;
+    padding-right: 4px;
+	padding-bottom: 4px;
+	display: inline
+}
+.nav-right {
+    position: relative;
+    float: right;
+    width: auto;
+    display: inline;
+}
+
+
 /* .topnav a {
 	display: block;
 	color: #f2f2f2;
@@ -37,8 +53,6 @@
 	background-color: #ddd;
 	color: black;
 } */
-
-
 .errormsg {
 	color: red;
 }
@@ -89,50 +103,45 @@ button:hover {
 	color: white;
 }
 
-.margin_left {
-	margin-left: 3%;
+.width85 {
+	width: 75%;
 }
 
-.width85{
-	width:75%;
-}
-
-.pagination-position{
-	position:absolute;
-	bottom:3em;
-	left:40%;
+.pagination-position {
+	position: absolute;
+	bottom: 3em;
+	left: 40%;
 }
 /* Pagination links */
 .pagination a {
-  display:inline;
-  color: grey;
-  padding: 8px 16px;
-  text-decoration: none;
-  border-radius: 5px;
-  transition: background-color .3s;
- 
+	display: inline;
+	color: grey;
+	padding: 8px 16px;
+	text-decoration: none;
+	border-radius: 5px;
+	transition: background-color .3s;
 }
 
 /* Style the active/current link */
-.pagination ul,li{
-	padding-inline-start:0px;
-	list_style:none;
-	display:inline; 
+.pagination ul, li {
+	padding-inline-start: 0px;
+	list_style: none;
+	display: inline;
 	/*Override */
-	padding-left:0em;
-	
+	padding-left: 0em;
 }
-.pagination li{
-	padding-left:0em;
+
+.pagination li {
+	padding-left: 0em;
 }
 
 .pagination a.active {
-  background-color: #21b2a6;
-  border-radius: 5px;
-  color: white;
+	background-color: #21b2a6;
+	border-radius: 5px;
+	color: white;
 }
 
 /* Add a grey background color on mouse-over */
-.pagination a:hover:not(.active) {
+.pagination a:hover:not (.active ) {
 	background-color: #ddd;
-	}
+}

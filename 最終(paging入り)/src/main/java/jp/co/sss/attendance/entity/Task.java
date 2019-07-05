@@ -19,7 +19,7 @@ public class Task {
 	private String taskName;
 	
 	@OneToMany(mappedBy="task")
-	private List<Registry> registryList;
+	private List<TaskInfoRegistry> registryList;
 
 	public String getTaskCode() {
 		return taskCode;
@@ -37,12 +37,12 @@ public class Task {
 		this.taskName = taskName;
 	}
 
-	public List<Registry> getRegistryList() {
+	public List<TaskInfoRegistry> getRegistryList() {
 		return registryList;
 	}
 
-	public void setRegistryList(List<Registry> registryList) {
-		this.registryList = registryList;
+	public void setRegistryList(List<TaskInfoRegistry> taskInfoRegistryList) {
+		this.registryList = taskInfoRegistryList;
 	}
 	
 	

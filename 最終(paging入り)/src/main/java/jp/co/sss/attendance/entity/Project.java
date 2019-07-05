@@ -9,39 +9,38 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="projectCodeMst")
+@Table(name = "projectCodeMst")
 public class Project {
-	@Id
-	private String projectCode;
-	@Column
-	private String projectName;
-	
-	@OneToMany(mappedBy="project")
-	private List<Registry> registryList;
+    @Id
+    private String projectCode;
+    @Column
+    private String projectName;
 
-	public String getProjectCode() {
-		return projectCode;
-	}
+    @OneToMany(mappedBy = "project")
+    private List<TaskInfoRegistry> registryList;
 
-	public void setProjectCode(String projectCode) {
-		this.projectCode = projectCode;
-	}
+    public String getProjectCode() {
+        return projectCode;
+    }
 
-	public String getProjectName() {
-		return projectName;
-	}
+    public void setProjectCode(String projectCode) {
+        this.projectCode = projectCode;
+    }
 
-	public void setProjectName(String projectName) {
-		this.projectName = projectName;
-	}
+    public String getProjectName() {
+        return projectName;
+    }
 
-	public List<Registry> getRegistryList() {
-		return registryList;
-	}
+    public void setProjectName(String projectName) {
+        this.projectName = projectName;
+    }
 
-	public void setRegistryList(List<Registry> registryList) {
-		this.registryList = registryList;
-	}
-	
+    public List<TaskInfoRegistry> getRegistryList() {
+        return registryList;
+    }
+
+    public void setRegistryList(List<TaskInfoRegistry> taskInfoRegistryList) {
+        this.registryList = taskInfoRegistryList;
+    }
 
 }

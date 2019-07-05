@@ -1,71 +1,96 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link th:href="@{/css/design.css}" rel="stylesheet" media="screen" />
-<link th:href="@{/css/main.css}" rel="stylesheet" media="screen" />
-<link th:href="@{/css/fontawesome-all.min.css}" rel="stylesheet"
-	media="screen" />
-<link th:href="@{/css/noscript.css}" rel="stylesheet" media="screen" />
-<!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous"> -->
-<title>登録一覧</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link th:href="@{/css/design.css}" rel="stylesheet" media="screen"/>
+    <link th:href="@{/css/main.css}" rel="stylesheet" media="screen"/>
+    <link th:href="@{/css/fontawesome-all.min.css}" rel="stylesheet"
+          media="screen"/>
+    <link th:href="@{/css/noscript.css}" rel="stylesheet" media="screen"/>
+    <!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous"> -->
+    <title>登録一覧</title>
 </head>
 <body>
-	<div class="header-text">
-		<a class='' href="../menu">メニュー</a><a class='' href="../logout"><span
-			th:text="${session.userId}"></span> からlogout</a>
-	</div>
+<div class="header-text nav">
+    <a class='' href="../menu">メニュー</a><a href="../logout"><span
+        th:text="${session.userId}"></span> からlogout</a>
+    <div id="navsearch" class="nav-right">
+        <form action="/registrationList/search/1" method="post">
+            <select  class="nav-right" style="width: auto">
+                <option value="Date">日付</option>
+                <option selected="selected" value="Project">プロジェクト</option>
+                <option value="Task">タスク分類</option>
+            </select>
+            <input type="text" name="searchProject" class="nav-right" style="width: auto"
+                   placeholder="What can I help you with today?">
+            <input type="submit" value="Search" class="nav-right" style="width: auto">
+        </form>
+    </div>
+</div>
 
-	<table frame="box">
-		<tr>
-			<th>日付</th>
-			<th>開始</th>
-			<th>終了</th>
-			<th>プロジェクト</th>
-			<th>分類</th>
-			<th>作業内容</th>
-			<th>時間</th>
-			<th>編集</th>
-		</tr>
-		<tr th:each="task:${taskInfo}">
-			<td th:text="${task.attendedDate}"></td>
-			<td th:text="${task.startTime}"></td>
-			<td th:text="${task.endTime}"></td>
-			<td th:text="${task.project.projectName}"></td>
-			<td th:text="${task.task.taskName}"></td>
-			<td th:text="${task.taskDescription}"></td>
-			<td th:text="${task.taskHours}"></td>
 
-			<td><form method="post"
-					th:action="@{/registrationForm/edit/input/}+${task.taskInfoId}">
-					<input type="submit" class="btn" value="編集" />
-				</form></td>
-			<!-- <td><form method="post" th:action="@{/registrationForm/delete/}+${task.taskInfoId}">
-					<input type="submit"class="btn" value="削除" />
-				</form></td> -->
-		</tr>
-	</table>
-	<div class="pagination center pagination-position">
-		<a th:if="${pageNo.equals(1)}" href="#">&laquo;</a>
-		<a th:if="${!pageNo.equals(1)}" th:href="@{/registrationList/}+${pageNo-1}">&laquo;</a>
-		<ul class="pagination" th:fragment="pagination"
-			th:each="pageNumber:${pagesList}">
-			<li><a th:href="@{/registrationList/}+${pageNumber}"
-				th:text="${pageNumber}" th:class="${pageNumber==pageNo} ? active"></a></li>
-		</ul>
-		<a th:if="${pageNo.equals(LastPage)}" href="#">&raquo;</a>
-		<a th:if="${!pageNo.equals(LastPage)}" th:href="@{/registrationList/}+${pageNo+1}">&raquo;</a>
-		
-	</div>
-	<!-- <div class="pagination center">
-		<ul>
-			<li>1</li>
-			<li>2</li>
-		</ul>
-	</div> -->
-	<!-- 	 <a class="active" href="#">1</a> <a  href="#">2</a>
-		<a href="#">3</a> <a href="#">4</a> <a href="#">5</a> <a href="#">6</a>
-		 -->
+<table frame="box">
+    <col width="150">
+    <col width="90">
+    <col width="90">
+    <col width="200">
+    <col width="200">
+    <col width="130">
+    <col width="130">
+    <col width="150">
+    <tr>
+        <th>日付</th>
+        <th>開始</th>
+        <th>終了</th>
+        <th>プロジェクト</th>
+        <th>タスク分類</th>
+        <th>作業内容</th>
+        <th>時間</th>
+        <th>編集</th>
+    </tr>
+    <tr th:each="task:${taskInfo}">
+        <td th:text="${task.attendedDate}"></td>
+        <td th:text="${task.startTime}"></td>
+        <td th:text="${task.endTime}"></td>
+        <td th:text="${task.project.projectName}"></td>
+        <td th:text="${task.task.taskName}"></td>
+        <td th:text="${task.taskDescription}"></td>
+        <td th:text="${task.taskHours}"></td>
+
+        <td>
+            <form method="post"
+                  th:action="@{/registrationForm/edit/input/}+${task.taskInfoId}">
+                <input type="submit" class="btn" value="編集"/>
+            </form>
+        </td>
+        <!-- <td><form method="post" th:action="@{/registrationForm/delete/}+${task.taskInfoId}">
+                <input type="submit"class="btn" value="削除" />
+            </form></td> -->
+    </tr>
+</table>
+<div class="pagination center pagination-position">
+    <a th:if="${pageNo.equals(1)}" href="#">&laquo;</a><a
+        th:if="${!pageNo.equals(1)}"
+        th:href="@{/registrationList/}+${pageNo-1}">&laquo;</a>
+    <ul class="pagination" th:fragment="pagination"
+        th:each="pageNumber:${pagesList}">
+        <li><a th:href="@{/registrationList/}+${pageNumber}"
+               th:text="${pageNumber}" th:class="${pageNumber==pageNo} ? active"></a></li>
+    </ul>
+    <a th:if="${pageNo.equals(LastPage)}" href="#">&raquo;</a><a
+        th:if="${!pageNo.equals(LastPage)}"
+        th:href="@{/registrationList/}+${pageNo+1}">&raquo;</a>
+
+</div>
+<!-- <div class="pagination center">
+    <ul>
+        <li>1</li>
+        <li>2</li>
+    </ul>
+</div> -->
+<!-- 	 <a class="active" href="#">1</a> <a  href="#">2</a>
+    <a href="#">3</a> <a href="#">4</a> <a href="#">5</a> <a href="#">6</a>
+     -->
 </body>
 </html>
